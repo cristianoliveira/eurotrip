@@ -1,9 +1,9 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 pushd $DIR > /dev/null
+mkdir -p docker/files
 if [[ $1 == *.zip ]]; then
     echo "zip mode"
-    mkdir -p docker/files
     cp $1 docker/files/
     T="zip"
     F=`ls docker/files/`
