@@ -118,44 +118,44 @@ as well as the functionality and compliance of the application.
 
 Done with the fun part, the implementation? We have a few more requirements
 for you that might sound boring but help us a lot in testing your code. Before you
-send us your solution, package it.
+send us your solution, have some build scripts for it.
 
-Your micro service must contain two simple bash scripts in the top level
-repository directory.
+Because we are a friendly bunch of developers, we share a (simplified) script.
+Please open `service.sh` and fill out these 3:
 
-- `build.sh`: builds your project. This could be as simple as:
-  ```
-  #!/bin/bash
-  mvn clean package
-  ```
+```
+dev_test() {
+  # Do what you need to run your unit tests, e.g. mvn test
+}
 
-  We will execute this on an **Ubuntu 16.04** docker container with installed:
+dev_build() {
+  # Do what you need to package your app, e.g. mvn package
+}
 
-  ```
-  openjdk-8-jdk
-  maven
-  gradle
-  ```
+dev_run() {
+  # Do what you need to run your app, e.g. java -jar $DIR/target/magic.jar $*
+}
+```
 
-- `service.sh`: starts / stops your micro service. Accepts `start|stop|block`
-  and the path to a **bus routes data file** as arguments (`bash service.sh
-  start FILE`). After your micro service got started it shall answer queries
-  until it is terminated. Please use the template provided in the `template`
-  sub-directory. Feel encouraged to improve the script. The least you have to do
-  is to specify `RUN` and `NAME`. Something like this:
+### Smoke tests
 
-  ```
-  …
+Once you have filled out your build scripts, you can do quite a bit of things:
 
-  RUN="java -jar my-fancy-fat-jar.jar"
-  NAME=my-awesome-bus-route-service
-  
-  …
-  ```
-  
-  *Note: as stated above `service.sh` must be located in the top level directory
-  of your repository.
+```
+./service.sh smoke           : runs smoke tests on your app
+```
 
+
+
+### Docker
+
+Those 3 scripts are also enough to wrap your application inside docker. You can do the following too:
+
+```
+docker-build     : packages your app into a docker image
+docker-run       : runs your app using a docker image
+docker-smoke     : runs same smoke tests inside a docker container
+```
 
 ### Shipping
 
@@ -165,53 +165,12 @@ happy. If you are not able to share a git repository, e.g. for privacy reasons,
 please share a download link for a **zip** file. This zip file should contain a
 single folder that contains your project. The content of the zip file should
 look like this:
+
 ```
 project_folder
 ├── src
+├── data/
 ├── build.gradle/pom.xml
-├── build.sh
+├── Dockerfile
 └── service.sh
 ```
-
-
-### Quick Smoke Test
-
-*Note: This smoke test only checks for compliance, not for correctness!*
-
-We will run some tests on your implementation, and because we are a friendly
-bunch of developers, we share a (simplified) version of what we run. There 
-are some bash scripts located in the `tests/` directory:
-```
-build_docker_image.sh
-run_test_docker.sh
-run_test_local.sh
-simple_test.sh
-```
-
-Assuming a `bash` environment, you can do a quick local test:
-```
-bash build.sh
-cd tests/
-bash run_test_local.sh ../service.sh
-```
-This should output:
-```
-TEST PASSED!
-```
-
-Given a running `docker` installation and a UNIX-like environment you can run:
-```
-cd tests/
-bash build_docker_image.sh YOUR_GIT_REPO_URL|ZIP_FILE
-bash run_test_docker.sh
-```
-This should output:
-```
-TEST PASSED!
-```
-
-
-
-*Note: The docker based test assumes your running native docker. If not (e.g.
-your on OSX) please adopt the `run_test_docker.sh` file and replace `localhost`
-with the IP of your docker VM*
