@@ -92,7 +92,7 @@ Bus Routes Data File:
 ```
 
 Query:
-````
+```
 http://localhost:8088/api/direct?dep_sid=3&arr_sid=6
 ```
 
@@ -104,7 +104,6 @@ Response:
     "direct_bus_route": true
 }
 ```
-
 
 ### Implementation
 
@@ -133,9 +132,8 @@ dev_run() {
 }
 ```
 
-Once you have filled out those 3 essential steps, you can do a bunch
-of things with service.sh. Run `./service.sh` to see usage. For a starter,
-you can invoke the same 3 scripts above as:
+Once you have filled out those 2 steps, you can do a bunch of things.
+Run `./service.sh` to see usage. For a starter:
 
 ```
 ./service.sh           : prints usage
@@ -155,9 +153,9 @@ If you have `docker` installed on your machine, you can also run all the
 scripts and tests inside a docker container:
 
 ```
-./service.sh docker-build : packages your app into a docker image
-./service.sh docker-run   : runs your app using a docker image
-./service.sh docker-smoke : runs same smoke tests inside a docker container
+./service.sh docker_build : packages your app into a docker image
+./service.sh docker_run   : runs your app using a docker image
+./service.sh docker_smoke : runs same smoke tests inside a docker container
 ```
 
 ### Shipping

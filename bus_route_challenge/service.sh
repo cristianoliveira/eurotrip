@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# This whole script will run under this bus_route_challenge folder
-# irrespective of where it was invoked from
+# This script will run under bus_route_challenge folder irrespective of where it was invoked from
 cd $(dirname $0)
 
 dev_build() {
