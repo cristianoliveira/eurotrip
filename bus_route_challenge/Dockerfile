@@ -6,7 +6,5 @@ RUN apt-get -qq -y update && \
 
 WORKDIR /src
 ADD . .
-RUN ./service.sh test && \
-    ./service.sh build
-
-CMD ["/src/service.sh", "run", "tests/example"]
+RUN ./service.sh dev_build
+CMD ["/src/service.sh", "dev_run", "tests/example"]

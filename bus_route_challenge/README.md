@@ -121,13 +121,9 @@ for you that might sound boring but help us a lot in testing your code. Before y
 send us your solution, have some build scripts for it.
 
 Because we are a friendly bunch of developers, we share a (simplified) script.
-Please open `service.sh` and fill out these 3:
+Please open `service.sh` and fill out these 2 minimum steps:
 
 ```
-dev_test() {
-  # Do what you need to run your unit tests, e.g. mvn test
-}
-
 dev_build() {
   # Do what you need to package your app, e.g. mvn package
 }
@@ -137,24 +133,31 @@ dev_run() {
 }
 ```
 
-### Smoke tests
-
-Once you have filled out your build scripts, you can do quite a bit of things:
-
-```
-./service.sh smoke           : runs smoke tests on your app
-```
-
-
-
-### Docker
-
-Those 3 scripts are also enough to wrap your application inside docker. You can do the following too:
+Once you have filled out those 3 essential steps, you can do a bunch
+of things with service.sh. Run `./service.sh` to see usage. For a starter,
+you can invoke the same 3 scripts above as:
 
 ```
-docker-build     : packages your app into a docker image
-docker-run       : runs your app using a docker image
-docker-smoke     : runs same smoke tests inside a docker container
+./service.sh           : prints usage
+./service.sh dev_build : builds your app
+./service.sh dev_run   : runs your app
+```
+
+### Smoke Tests
+
+*Note: This smoke test only checks for compliance, not for correctness!*
+
+```
+./service.sh dev_smoke : runs our smoke tests on your machine
+```
+
+If you have `docker` installed on your machine, you can also run all the
+scripts and tests inside a docker container:
+
+```
+./service.sh docker-build : packages your app into a docker image
+./service.sh docker-run   : runs your app using a docker image
+./service.sh docker-smoke : runs same smoke tests inside a docker container
 ```
 
 ### Shipping
