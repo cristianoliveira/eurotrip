@@ -41,8 +41,8 @@ docker_run() {
 
 docker_smoke() {
   containerId=$(docker run -d goeuro:devtest)
-  echo "Waiting 5 seconds for service to start..."
-  sleep 5
+  echo "Waiting 10 seconds for service to start..."
+  sleep 10
   docker exec $containerId /src/service.sh dev_smoke
   retval=$?
   docker rm -f $containerId
