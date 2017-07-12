@@ -23,7 +23,7 @@ func Serve(settings *common.Setting) {
 	fmt.Println("/api/")
 	fmt.Println("/api/direct?dep_sid={}&arr_sid={}")
 
-	http.HandleFunc("/api/", HandleIndex)
+	http.HandleFunc("/api/", HandleIndex(repo))
 	http.HandleFunc("/api/direct", HandleBusRouteSearch(repo))
 
 	log.Fatal(http.ListenAndServe(address, nil))
