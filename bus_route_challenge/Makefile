@@ -9,7 +9,7 @@ build:
 	@GOPATH=$(GOPATH) go build -o bin/eurotrip "$(SOURCE)/main.go"
 
 start:
-	@GOPATH=$(GOPATH) go run "$(SOURCE)/main.go" run
+	@GOPATH=$(GOPATH) go run "$(SOURCE)/main.go" $(GOPATH)/data/example
 
 test:
 	@GOPATH=$(GOPATH) go test ./... -v
