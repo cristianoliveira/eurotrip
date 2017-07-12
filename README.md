@@ -26,6 +26,12 @@ Loading test for performance testing:
 make test-load
 ```
 
+Testing with big file
+```bash
+# inside of /bus_route_challenge/ folder
+make test-bigfile
+```
+
 ## Building
 
 ```bash
