@@ -20,6 +20,12 @@ make start
 make test
 ```
 
+Loading test for performance testing:
+```bash
+# inside of /bus_route_challenge/ folder
+make test-load
+```
+
 ## Building
 
 ```bash
