@@ -13,24 +13,22 @@ type ResponseData struct {
 
 type Handler func(w http.ResponseWriter, r *http.Request)
 
-func HandleIndex(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+func HandleIndex(repo *Itinerary) Handler {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	message := map[string]string{
-		"routes": "/api/",
-		"direct": "/api/direct?dep_sid={}&arr_sid={}",
+		js, err := json.Marshal(repo.Routes())
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+		w.Write(js)
 	}
-
-	js, err := json.Marshal(message)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Write(js)
 }
+
 func HandleBusRouteSearch(repo *Itinerary) Handler {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
