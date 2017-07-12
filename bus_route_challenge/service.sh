@@ -5,13 +5,13 @@ cd $(dirname $0)
 
 dev_build() {
   # Do what you need to package your app, e.g. mvn package
-  true
+  make build
 }
 
 dev_run() {
   # Do what you need to run your app in the foreground
   # e.g. java -jar target/magic.jar $*
-  sleep 600
+  make start
 }
 
 dev_smoke() {
@@ -43,7 +43,7 @@ docker_smoke() {
   containerId=$(docker run -d goeuro:devtest)
   echo "Waiting 10 seconds for service to start..."
   sleep 10
-  docker exec $containerId /src/service.sh dev_smoke
+  docker exec $containerId /go/service.sh dev_smoke
   retval=$?
   docker rm -f $containerId
   exit $retval
