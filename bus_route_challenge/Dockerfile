@@ -1,10 +1,12 @@
-FROM ubuntu:16.04
+FROM golang:1.8
 
-RUN apt-get -qq -y update && \
-    apt-get -qq -y install openjdk-8-jdk maven gradle curl && \
-    rm -rf /var/cache/apt /var/lib/apt/lists/*
-
-WORKDIR /src
+WORKDIR /go/
 ADD . .
+
+ADD ./service.sh src/
+
 RUN ./service.sh dev_build
-CMD ["/src/service.sh", "dev_run", "data/example"]
+
+CMD ["./service.sh", "dev_run", "data/example"]
+
+EXPOSE 8088
