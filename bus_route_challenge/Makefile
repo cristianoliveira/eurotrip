@@ -24,7 +24,7 @@ test-load: build
 	@echo "GET http://localhost:8088/api/direct?dep_sid=114&arr_sid=152" | vegeta attack -duration=10s | tee results.bin | vegeta report
 
 test-bigfile: build
-	@echo "Running test using a big file."
+	@echo "Running test using a big file. Loading it may take some time (around 5 min) ..."
 	$(GOPATH)/bin/eurotrip $(GOPATH)/data/example_big
 
 
